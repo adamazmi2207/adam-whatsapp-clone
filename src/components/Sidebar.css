@@ -24,11 +24,17 @@
     font-size: 24px !important;
 }
 
+.sidebar__chats{
+    flex: 1;
+    background-color: white ;
+    /* overflow:scroll */
+}
+
 .sidebar__search{
     display: flex;
     align-items: center;
     background-color: #f6f6f6;
-    height: 39px;
+    height: 39px; 
     padding: 10px;
 }
 
@@ -45,6 +51,7 @@
     color:gray;
     padding:10px !important;
 }
+
 .sidebar__searchContainer >input{
     border:none;
     margin-left: 10px;

@@ -12,7 +12,12 @@ function SidebarChat({ addNewChat }) {
     }, []);
 
 
-    const createChat = () => { }
+    const createChat = () => { 
+        const roomName=prompt("Please enter name for chatroom")
+        if(roomName){
+
+        }
+    }
 
     return !addNewChat ? (
         <div className="sidebarChat">
@@ -26,7 +31,7 @@ function SidebarChat({ addNewChat }) {
             <div onClick={createChat}
                 className="sidebarChat">
                 <div className="sidebarChat__info">
-                    <h2>Add New Chat</h2>
+                    <h2>Add New Chatroom</h2>
                 </div>
             </div>
         )
