@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Avatar, IconButton, } from '@material-ui/core'
 import DonutLargeIcon from "@material-ui/icons/DonutLarge"
 import ChatIcon from "@material-ui/icons/Chat"
@@ -7,10 +7,30 @@ import { SearchOutlined } from "@material-ui/icons"
 
 import './Sidebar.css'
 import SidebarChat from "./SidebarChat"
+import firestoreDb from '../firebase'
 
 
 
 function Sidebar() {
+    const [rooms, setRooms] = useState([])
+
+    useEffect(() => {
+        const unsubscribe = firestoreDb.collection("rooms").onSnapshot((snapshot) =>
+            setRooms(
+                snapshot.docs.map((doc) =>
+                    ({
+                        id: doc.id,
+                        data: doc.data(),
+                    })
+                ))
+        )
+
+        return () => {
+            unsubscribe()
+        }
+    }, [])
+
+
     return (
         <div className="sidebar">
             <div className="sidebar__header">
@@ -37,10 +57,10 @@ function Sidebar() {
 
             <div className="sidebar__chats">
                 <SidebarChat addNewChat />
-                <SidebarChat />
-                <SidebarChat />
-                <SidebarChat />
-                <SidebarChat />
+                {rooms.map(room => (
+                    <SidebarChat key={room.id} roomName={room.data.roomName} id={room.id} />
+                ))}
+
 
             </div>
         </div>
